@@ -26,7 +26,9 @@ data <- cbind(dateTime, data)
 data$dateTime <- as.POSIXct(dateTime)
 
 # PLOT
+png("plot3.png", width = 480, height = 480) # init device
 
+# set up plot
 with(data, {
     plot(Sub_metering_1~dateTime, type="l",
         ylab="Energy sub metering", xlab="")
@@ -34,9 +36,8 @@ with(data, {
         lines(Sub_metering_3~dateTime,col='Blue')
 })
 
-legend("topright", col=c("black", "red", "blue"), lwd=c(1,1,1),
-        c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+legend("topright", col = c("black", "red", "blue"), bty = "o", lty = 1, lwd = 2,
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
-# copy and save in png
-dev.copy(png,"plot3.png", width=480, height=480)
+# shut down device
 dev.off()

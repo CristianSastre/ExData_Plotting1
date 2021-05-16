@@ -26,7 +26,10 @@ data <- cbind(dateTime, data)
 data$dateTime <- as.POSIXct(dateTime)
 
 # PLOT
-par(mfrow=c(2,2), mar=c(4,4,2,1))
+png("plot4.png", width=480, height=480)# init device
+
+# set up plot
+par(mfrow=c(2,2))
 with(data, {
     plot(Global_active_power~dateTime, type="l", 
          ylab="Global Active Power", xlab="")
@@ -36,15 +39,14 @@ with(data, {
          ylab="Energy sub metering", xlab="")
     lines(Sub_metering_2~dateTime,col='Red')
     lines(Sub_metering_3~dateTime,col='Blue')
-    legend("topright", col=c("black", "red", "blue"), lty=1, lwd=2, bty="n",
-           legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+    legend("topright", col = c("black", "red", "blue"), bty = "n", lty = 1,
+           lwd = 2, legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
     plot(Global_reactive_power~dateTime, type="l", 
          ylab="Global_reactive_power",xlab="datetime")
 })
 
-# copy and save in png
-dev.copy(png,"plot4.png", width=480, height=480)
+# shut down device
 dev.off()
 
 ## reset default values
-## par(mfrow=c(1,1), c(5.1, 4.1, 4.1, 2.1), c(5.1,4.1,4.1,2.1))
+## par(mfrow=c(1,1))
